@@ -83,15 +83,23 @@ A `capture_description` block supports the following:
 
 A `destination` block supports the following:
 
-* `name` - (Required) The Name of the Destination where the capture should take place. At this time the only supported value is `EventHubArchive.AzureBlockBlob`.
+* `name` - (Required) The Name of the Destination where the capture should take place. Supported values are `EventHubArchive.AzureBlockBlob` or `EventHubArchive.AzureDataLake`.
 
 -> At this time it's only possible to Capture EventHub messages to Blob Storage. There's [a Feature Request for the Azure SDK to add support for Capturing messages to Azure Data Lake here](https://github.com/Azure/azure-rest-api-specs/issues/2255).
 
 * `archive_name_format` - (Required) The Blob naming convention for archiving. e.g. `{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}`. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order
 
-* `blob_container_name` - (Required) The name of the Container within the Blob Storage Account where messages should be archived.
+* `blob_container_name` - (Optional) The name of the Container within the Blob Storage Account where messages should be archived.
 
-* `storage_account_id` - (Required) The ID of the Blob Storage Account where messages should be archived.
+* `storage_account_id` - (Optional) The ID of the Blob Storage Account where messages should be archived.
+  
+* `datalake_account_name` - (Optional) The name of the Azure Data Lake account where messages should be archived. The datalake account should exists in the same subscription as the Event Hub.
+
+* `datalake_folder_path` - (Optional) The folder path of the Azure Data Lake account where messages should be archived. Please ensure the required permission is granted to the Event Hub, for more information, please visit: https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-archive-eventhub-capture.
+
+~> **Note:** Only one of destinations can be selected, either blob container or data lake.
+
+
 
 ## Attributes Reference
 
